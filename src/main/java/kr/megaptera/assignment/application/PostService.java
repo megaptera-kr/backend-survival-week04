@@ -49,6 +49,9 @@ public class PostService {
     public UpdatePostResponse updatePost(Long id, UpdatePostRequest request) {
         Post post = postRepository.findById(id);
 
+        post.changeTitle(request.getTitle());
+        post.changeContent(request.getContent());
+
         return new UpdatePostResponse(post.getId().toString(), request.getTitle(), post.getAuthor(),
                 request.getContent());
     }

@@ -46,6 +46,7 @@ public class PostRepository {
     public Post delete(Long id) {
         Post removed = posts.remove(id);
         degenerateId();
+
         return removed;
     }
 }

@@ -1,14 +1,14 @@
 package kr.megaptera.assignment.domains;
 
-public class Post {
+public class Comment {
 
     private Long id;
-    private String title;
+    private Long postId;
     private String author;
     private String content;
 
-    public Post(String title, String author, String content) {
-        this.title = title;
+    public Comment(Long postId, String author, String content) {
+        this.postId = postId;
         this.author = author;
         this.content = content;
     }
@@ -17,12 +17,12 @@ public class Post {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
+    public Long getPostId() {
+        return postId;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getId() {
+        return id;
     }
 
     public String getAuthor() {
@@ -31,10 +31,6 @@ public class Post {
 
     public String getContent() {
         return content;
-    }
-
-    public void changeTitle(String title) {
-        this.title = title;
     }
 
     public void changeContent(String content) {

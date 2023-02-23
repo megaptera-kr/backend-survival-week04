@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
+
     private final PostService postService;
 
     public PostController(PostService postService) {
@@ -48,7 +49,8 @@ public class PostController {
     }
 
     @PatchMapping("/{id}")
-    public UpdatePostResponse updatePost(@PathVariable Long id, @RequestBody UpdatePostRequest request) {
+    public UpdatePostResponse updatePost(@PathVariable Long id,
+            @RequestBody UpdatePostRequest request) {
         return postService.updatePost(id, request);
     }
 
