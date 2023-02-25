@@ -28,14 +28,14 @@ public class CommentService {
   public CommentResponseDto editComment(String id, String postId,
                                         CommentEditRequestDto commentEditRequestDto) {
     if (!commentRepository.checkExists(id)) {
-      throw new IllegalArgumentException("don't have that item");
+      return null;
     }
     return commentRepository.editComment(id, postId, commentEditRequestDto);
   }
 
   public CommentResponseDto deleteComment(String id) {
     if (!commentRepository.checkExists(id)) {
-      throw new IllegalArgumentException("don't have that item");
+      return null;
     }
     return commentRepository.deleteComment(id);
   }

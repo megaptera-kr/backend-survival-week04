@@ -30,7 +30,7 @@ public class PostService {
 
   public PostResponseDto editPost(String id, PostUpdateRequestDto postUpdateRequestDto) {
     if (!postRepository.checkExists(id)) {
-      throw new IllegalArgumentException("don't have that item");
+      return null;
     }
 
     return postRepository.editPost(id, postUpdateRequestDto);
@@ -38,7 +38,7 @@ public class PostService {
 
   public PostResponseDto deletePost(String id) {
     if (!postRepository.checkExists(id)) {
-      throw new IllegalArgumentException("don't have that item");
+      return null;
     }
     return postRepository.deletePost(id);
   }

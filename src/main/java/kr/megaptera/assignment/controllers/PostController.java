@@ -5,12 +5,11 @@ import kr.megaptera.assignment.dtos.PostCreateRequestDto;
 import kr.megaptera.assignment.dtos.PostResponseDto;
 import kr.megaptera.assignment.dtos.PostUpdateRequestDto;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(value = "http://localhost:8000")
 @RequestMapping("/posts")
 @RestController
 public class PostController {
@@ -44,9 +42,10 @@ public class PostController {
     return postService.addPost(postCreateRequestDto);
   }
 
-  @PutMapping("/{id}")
-  public PostResponseDto editPost(@PathVariable String id, @RequestBody PostUpdateRequestDto postUpdateRequestDto) {
-    return postService.editPost(id, postUpdateRequestDto)
+  @PatchMapping("/{id}")
+  public PostResponseDto editPost(@PathVariable String id,
+                                  @RequestBody PostUpdateRequestDto postUpdateRequestDto) {
+    return postService.editPost(id, postUpdateRequestDto);
   }
 
   @DeleteMapping("/{id}")

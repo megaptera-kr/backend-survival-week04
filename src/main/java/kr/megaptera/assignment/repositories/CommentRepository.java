@@ -65,8 +65,8 @@ public class CommentRepository {
   }
 
   private int findIdx(String id) {
-    OptionalInt indexOpt = IntStream.range(0, commentDtos.size())
-                                    .filter(idx -> id.equals(commentDtos.get(idx).getId()))
+    OptionalInt indexOpt = IntStream.range(0, commentEntities.size())
+                                    .filter(idx -> id.equals(commentEntities.get(idx).getId()))
                                     .findFirst();
     if (!indexOpt.isPresent()) {
       throw new IllegalArgumentException("don't have that item");
