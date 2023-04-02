@@ -25,6 +25,7 @@ public class PostService {
         var posts = postRepository.findAll();
         return Arrays.stream(posts)
                 .map(postDtoFactory::create)
+                .sorted()
                 .toArray(PostReadDto[]::new);
     }
 
@@ -51,6 +52,7 @@ public class PostService {
             throw new PostNotFoundException();
         }
 
+        post.setTitle(source.getTitle());
         post.setContent(source.getContent());
         postRepository.update(id, post);
 
