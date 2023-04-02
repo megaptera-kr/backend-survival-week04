@@ -16,8 +16,8 @@ public class AssignmentApplication {
     public static void main(String[] args) {
         var context = SpringApplication.run(AssignmentApplication.class, args);
 
-        var postWithCommentService = context.getBean(PostWithCommentService.class);
-        postWithCommentService.init();
+        //var postWithCommentService = context.getBean(PostWithCommentService.class);
+        //postWithCommentService.init();
     }
 
     @Bean
