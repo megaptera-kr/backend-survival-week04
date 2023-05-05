@@ -35,7 +35,7 @@ public class PostRepository {
         posts.replace(post.id(), post);
     }
 
-    public Post delete(String id) {
-        return posts.remove(PostId.of(id));
+    public Post delete(Post post) {
+        return posts.remove(post.id());
     }
 }

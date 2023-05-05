@@ -46,7 +46,8 @@ public class PostService {
     }
 
     public PostDto delete(String id) {
-        Post post = postRepository.delete(id);
+        Post post = postRepository.findPost(id);
+        postRepository.delete(post);
         return new PostDto(post);
     }
 }

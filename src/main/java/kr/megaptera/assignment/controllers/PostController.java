@@ -55,6 +55,7 @@ public class PostController {
     }
 
     @ExceptionHandler(PostNotFound.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     private String postNotFound() {
         return "게시물을 찾을 수 없습니다.";
     }
