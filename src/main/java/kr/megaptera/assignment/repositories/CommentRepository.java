@@ -1,6 +1,7 @@
 package kr.megaptera.assignment.repositories;
 
 import kr.megaptera.assignment.dto.CommentDto;
+import kr.megaptera.assignment.exceptions.CommentNotFound;
 import kr.megaptera.assignment.models.Comment;
 import kr.megaptera.assignment.models.CommentId;
 import kr.megaptera.assignment.models.PostId;
@@ -28,7 +29,11 @@ public class CommentRepository {
     }
 
     public Comment find(CommentId commentId) {
-        return comments.get(commentId);
+        Comment comment = comments.get(commentId);
+        if (comment == null) {
+            throw new CommentNotFound();
+        }
+        return comment;
     }
 
     public Comment remove(CommentId commentId) {
