@@ -2,6 +2,7 @@ package kr.megaptera.assignment.daos;
 
 import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.dtos.request.RqCreatePostDto;
+import kr.megaptera.assignment.dtos.request.RqUpdatePostDto;
 import kr.megaptera.assignment.exceptions.NotFoundException;
 import kr.megaptera.assignment.models.Author;
 import kr.megaptera.assignment.models.Content;
@@ -11,7 +12,6 @@ import kr.megaptera.assignment.models.Title;
 import kr.megaptera.assignment.repositories.PostRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PostListDAO implements PostDAO {
@@ -32,11 +32,9 @@ public class PostListDAO implements PostDAO {
 
     @Override
     public PostDto getPostById(int postId) {
-        Optional<Post> post = postRepository.findById(PostId.of(postId));
-        if (post.isEmpty()) {
-            throw new NotFoundException();
-        }
-        return new PostDto(post.get());
+        Post post = postRepository.findById(PostId.of(postId))
+                .orElseThrow(NotFoundException::new);
+        return new PostDto(post);
     }
 
     @Override
@@ -46,5 +44,23 @@ public class PostListDAO implements PostDAO {
                 Content.of(dto.getContent()));
         Post savePost = postRepository.savePost(post);
         return new PostDto(savePost);
+    }
+
+    @Override
+    public PostDto updatePost(RqUpdatePostDto dto, int postId) {
+        Post post = postRepository.findById(PostId.of(postId))
+                .orElseThrow(NotFoundException::new);
+        post.update(Title.of(dto.getTitle()),
+                Content.of(dto.getContent()));
+        Post updatePost = postRepository.updatePost(post);
+        return new PostDto(updatePost);
+    }
+
+    @Override
+    public PostDto deletePost(int postId) {
+        Post post = postRepository.findById(PostId.of(postId))
+                .orElseThrow(NotFoundException::new);
+        postRepository.deletePost(post);
+        return new PostDto(post);
     }
 }

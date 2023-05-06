@@ -10,9 +10,9 @@ public class CustomWebMvcConfigurer implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/posts/**")
                 .allowedOrigins("http://localhost:8000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS");
         registry.addMapping("/comments/**")
                 .allowedOrigins("http://localhost:8000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                .allowedMethods("GET", "POST", "PATCH", "DELETE", "OPTIONS");
     }
 }

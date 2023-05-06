@@ -3,8 +3,11 @@ package kr.megaptera.assignment.controllers;
 import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.dtos.request.RqCreatePostDto;
+import kr.megaptera.assignment.dtos.request.RqUpdatePostDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,5 +38,16 @@ public class PostController {
     @PostMapping()
     public ResponseEntity<PostDto> createPost(@RequestBody RqCreatePostDto dto) {
         return postService.createPost(dto);
+    }
+
+    @PatchMapping("/{postId}")
+    public ResponseEntity<PostDto> updatePost(@RequestBody RqUpdatePostDto dto,
+                                              @PathVariable("postId") int postId) {
+        return postService.updatePost(dto, postId);
+    }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<PostDto> deletePost(@PathVariable("postId") int postId) {
+        return postService.deletePost(postId);
     }
 }

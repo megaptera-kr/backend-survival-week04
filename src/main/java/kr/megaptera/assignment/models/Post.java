@@ -16,19 +16,24 @@ public class Post {
         this.content = content;
     }
 
-    public PostId getId() {
+    public void update(Title title, Content content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public PostId Id() {
         return id;
     }
 
-    public Title getTitle() {
+    public Title Title() {
         return title;
     }
 
-    public Author getAuthor() {
+    public Author Author() {
         return author;
     }
 
-    public Content getContent() {
+    public Content Content() {
         return content;
     }
 
