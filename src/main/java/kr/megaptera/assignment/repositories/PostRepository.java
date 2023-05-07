@@ -25,4 +25,8 @@ public class PostRepository {
     public List<Post> findAll() {
         return new ArrayList<>(posts.values());
     }
+
+    public Post find(String postId) {
+        return posts.get(PostId.of(postId));
+    }
 }

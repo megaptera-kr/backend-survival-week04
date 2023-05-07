@@ -17,4 +17,9 @@ public class PostService {
         List<Post> posts = postRepository.findAll();
         return posts.stream().map(post -> new PostDto(post)).toList();
     }
+
+    public PostDto find(String postId) {
+        Post post = postRepository.find(postId);
+        return new PostDto(post);
+    }
 }

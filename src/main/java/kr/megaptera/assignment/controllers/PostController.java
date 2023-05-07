@@ -4,6 +4,7 @@ package kr.megaptera.assignment.controllers;
 import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dtos.PostDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,10 @@ public class PostController {
     @GetMapping
     private List<PostDto> getPosts() {
         return postService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    private PostDto getPosts(@PathVariable("id") String postId) {
+        return postService.find(postId);
     }
 }
