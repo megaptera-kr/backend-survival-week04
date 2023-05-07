@@ -35,4 +35,9 @@ public class Post {
     public String author() {
         return author;
     }
+
+    public void update(PostTitle title, MultiLineText content) {
+        this.title = title;
+        this.content = content;
+    }
 }

@@ -2,6 +2,7 @@ package kr.megaptera.assignment.application;
 
 import kr.megaptera.assignment.dtos.PostCreateDto;
 import kr.megaptera.assignment.dtos.PostDto;
+import kr.megaptera.assignment.dtos.PostUpdateDto;
 import kr.megaptera.assignment.models.MultiLineText;
 import kr.megaptera.assignment.models.Post;
 import kr.megaptera.assignment.models.PostTitle;
@@ -33,6 +34,15 @@ public class PostService {
                 MultiLineText.of(postCreateDto.getContent())
         );
         postRepository.create(post);
+        return new PostDto(post);
+    }
+
+    public PostDto update(String postId, PostUpdateDto postUpdateDto) {
+        Post post = postRepository.find(postId);
+        post.update(
+                PostTitle.of(postUpdateDto.getTitle()),
+                MultiLineText.of(postUpdateDto.getContent())
+        );
         return new PostDto(post);
     }
 }
