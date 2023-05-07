@@ -33,4 +33,8 @@ public class PostRepository {
     public void create(Post post) {
         posts.put(post.id(), post);
     }
+
+    public void delete(String postId) {
+        posts.remove(PostId.of(postId));
+    }
 }

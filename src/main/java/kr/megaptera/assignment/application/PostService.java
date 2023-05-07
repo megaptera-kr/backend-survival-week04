@@ -45,4 +45,10 @@ public class PostService {
         );
         return new PostDto(post);
     }
+
+    public PostDto delete(String postId) {
+        Post post = postRepository.find(postId);
+        postRepository.delete(postId);
+        return new PostDto(post);
+    }
 }

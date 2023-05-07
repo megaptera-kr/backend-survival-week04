@@ -6,6 +6,7 @@ import kr.megaptera.assignment.dtos.PostCreateDto;
 import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.dtos.PostUpdateDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,5 +46,10 @@ public class PostController {
     @PatchMapping("/{id}")
     private PostDto updatePost(@PathVariable("id") String postId, @RequestBody PostUpdateDto postUpdateDto) {
         return postService.update(postId, postUpdateDto);
+    }
+
+    @DeleteMapping("/{id}")
+    private PostDto deletePost(@PathVariable("id") String postId) {
+        return postService.delete(postId);
     }
 }
