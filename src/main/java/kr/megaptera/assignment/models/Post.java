@@ -13,6 +13,13 @@ public class Post {
         this.content = content;
     }
 
+    public Post(PostTitle title, String author, MultiLineText content) {
+        this.id = PostId.generate();
+        this.title = title;
+        this.author = author;
+        this.content = content;
+    }
+
     public PostId id() {
         return id;
     }

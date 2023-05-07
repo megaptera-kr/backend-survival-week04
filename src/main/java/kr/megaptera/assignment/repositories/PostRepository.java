@@ -29,4 +29,8 @@ public class PostRepository {
     public Post find(String postId) {
         return posts.get(PostId.of(postId));
     }
+
+    public void create(Post post) {
+        posts.put(post.id(), post);
+    }
 }
