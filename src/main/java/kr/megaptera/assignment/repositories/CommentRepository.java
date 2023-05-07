@@ -13,6 +13,7 @@ import java.util.Map;
 public class CommentRepository {
     private final Map<CommentId, Comment> comments;
 
+
     public CommentRepository() {
         this.comments = new HashMap<CommentId, Comment>();
         this.comments.put(CommentId.of("1"),
@@ -21,8 +22,17 @@ public class CommentRepository {
                 new Comment(CommentId.of("2"), PostId.of("1"), "ppp", MultiLineText.of("RMF")));
 
     }
+
     public List<Comment> findAll(String postId) {
         List<Comment> comments = new ArrayList<>(this.comments.values());
         return comments.stream().filter(comment -> comment.postId().equals(PostId.of(postId))).toList();
+    }
+
+    public Comment find(String commentId) {
+        return comments.get(CommentId.of(commentId));
+    }
+
+    public void create(Comment comment) {
+        comments.put(comment.id(), comment);
     }
 }
