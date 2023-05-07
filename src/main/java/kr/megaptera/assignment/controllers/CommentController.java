@@ -5,6 +5,7 @@ import kr.megaptera.assignment.dtos.CommentCreateDto;
 import kr.megaptera.assignment.dtos.CommentDto;
 import kr.megaptera.assignment.dtos.CommentUpdateDto;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,5 +42,10 @@ public class CommentController {
     @PatchMapping("/{id}")
     private CommentDto updateComment(@PathVariable("id") String commentId, @RequestParam("postId") String postId, @RequestBody CommentUpdateDto commentUpdateDto) {
         return commentService.update(commentId, postId, commentUpdateDto);
+    }
+
+    @DeleteMapping("/{id}")
+    private CommentDto deleteComment(@PathVariable("id") String commentId, @RequestParam("postId") String postId) {
+        return commentService.delete(commentId, postId);
     }
 }

@@ -40,4 +40,10 @@ public class CommentService {
 
         return new CommentDto(comment);
     }
+
+    public CommentDto delete(String commentId, String postId) {
+        Comment comment = commentRepository.find(commentId);
+        commentRepository.delete(commentId);
+        return new CommentDto(comment);
+    }
 }

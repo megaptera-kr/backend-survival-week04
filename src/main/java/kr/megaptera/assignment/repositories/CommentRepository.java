@@ -35,4 +35,8 @@ public class CommentRepository {
     public void create(Comment comment) {
         comments.put(comment.id(), comment);
     }
+
+    public void delete(String commentId) {
+        comments.remove(CommentId.of(commentId));
+    }
 }
