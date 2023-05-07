@@ -2,7 +2,6 @@ package kr.megaptera.assignment.repositories;
 
 import kr.megaptera.assignment.models.Comment;
 import kr.megaptera.assignment.models.CommentId;
-import kr.megaptera.assignment.models.MultiLineText;
 import kr.megaptera.assignment.models.PostId;
 
 import java.util.ArrayList;
@@ -16,11 +15,6 @@ public class CommentRepository {
 
     public CommentRepository() {
         this.comments = new HashMap<CommentId, Comment>();
-        this.comments.put(CommentId.of("1"),
-                new Comment(CommentId.of("1"), PostId.of("1"), "pej", MultiLineText.of("EOT")));
-        this.comments.put(CommentId.of("2"),
-                new Comment(CommentId.of("2"), PostId.of("1"), "ppp", MultiLineText.of("RMF")));
-
     }
 
     public List<Comment> findAll(String postId) {
