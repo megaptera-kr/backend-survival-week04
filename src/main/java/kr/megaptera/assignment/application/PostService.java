@@ -6,7 +6,7 @@ import kr.megaptera.assignment.dtos.PostDeleteResponseDTO;
 import kr.megaptera.assignment.dtos.PostGetResponseDTO;
 import kr.megaptera.assignment.dtos.PostUpdateRequestDTO;
 import kr.megaptera.assignment.dtos.PostUpdateResponseDTO;
-import kr.megaptera.assignment.exceptions.PostIdParsingException;
+import kr.megaptera.assignment.exceptions.ParsingException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class PostService {
         try {
             postId = Long.parseLong(id);
         } catch (NumberFormatException e) {
-            throw new PostIdParsingException();
+            throw new ParsingException();
         }
 
         return postId;
