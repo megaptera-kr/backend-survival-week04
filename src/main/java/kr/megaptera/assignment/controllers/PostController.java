@@ -77,7 +77,7 @@ public class PostController {
 
 //    INVALID_INPUT_VALUE("올바른 입력값이 아닙니다", "COMMON-001",HttpStatus.BAD_REQUEST);
     @ExceptionHandler(PostIdParsingException.class)
-    public ResponseEntity<ErrorResponse> postIdParsingException() {
+    public ResponseEntity<ErrorResponse> postIdParsingException(PostIdParsingException e) {
         return new ResponseEntity<>(
                 ErrorResponse.of(INVALID_INPUT_VALUE),
                 INVALID_INPUT_VALUE.getStatus());

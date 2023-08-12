@@ -1,8 +1,14 @@
 package kr.megaptera.assignment.exceptions;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
-    private final String message;
-    private final String code;
+    private String message;
+    private String code;
 
     private ErrorResponse(String message, String code) {
         this.message = message;

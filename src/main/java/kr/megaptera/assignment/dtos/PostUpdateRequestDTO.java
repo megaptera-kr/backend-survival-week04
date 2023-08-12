@@ -1,4 +1,10 @@
 package kr.megaptera.assignment.dtos;
 
-public record PostUpdateRequestDTO() {
+import lombok.Builder;
+
+@Builder
+public record PostUpdateRequestDTO(
+        String title,
+        String content
+) {
 }
