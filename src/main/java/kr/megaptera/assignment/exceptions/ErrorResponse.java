@@ -10,11 +10,6 @@ public class ErrorResponse {
     private String message;
     private String code;
 
-    private ErrorResponse(String message, String code) {
-        this.message = message;
-        this.code = code;
-    }
-
     private ErrorResponse(ErrorCode code) {
         this.message = code.getMessage();
         this.code = code.getCode();
