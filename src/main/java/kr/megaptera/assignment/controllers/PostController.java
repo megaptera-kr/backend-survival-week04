@@ -1,18 +1,16 @@
 package kr.megaptera.assignment.controllers;
 
-import kr.megaptera.assignment.application.PostService;
+import kr.megaptera.assignment.application.service.PostService;
 import kr.megaptera.assignment.dtos.PostCreateRequestDTO;
 import kr.megaptera.assignment.dtos.PostCreateResponseDTO;
 import kr.megaptera.assignment.dtos.PostDeleteResponseDTO;
 import kr.megaptera.assignment.dtos.PostGetResponseDTO;
 import kr.megaptera.assignment.dtos.PostUpdateRequestDTO;
 import kr.megaptera.assignment.dtos.PostUpdateResponseDTO;
-import kr.megaptera.assignment.exceptions.ErrorResponse;
-import kr.megaptera.assignment.exceptions.ParsingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static kr.megaptera.assignment.exceptions.ErrorCode.*;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -60,9 +57,9 @@ public class PostController {
 
     // 게시글 수정 - PATCH /posts/{id}
     @PatchMapping("/{id}")
-    public ResponseEntity<PostUpdateResponseDTO> update(@PathVariable String id,
+    public ResponseEntity<PostUpdateResponseDTO> update(@PathVariable("id") String postId,
                                                         @RequestBody PostUpdateRequestDTO requestDTO) {
-        PostUpdateResponseDTO responseDTO = postService.update(id,
+        PostUpdateResponseDTO responseDTO = postService.update(postId,
                                                                requestDTO);
         return new ResponseEntity<>(responseDTO,
                                     HttpStatus.OK);
@@ -70,8 +67,8 @@ public class PostController {
 
     // 게시글 삭제 - DELETE /posts/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<PostDeleteResponseDTO> delete(@PathVariable String id) {
-        PostDeleteResponseDTO responseDTO = postService.delete(id);
+    public ResponseEntity<PostDeleteResponseDTO> delete(@PathVariable("id") String postId) {
+        PostDeleteResponseDTO responseDTO = postService.delete(postId);
         return new ResponseEntity<>(responseDTO,
                                     HttpStatus.OK);
     }
