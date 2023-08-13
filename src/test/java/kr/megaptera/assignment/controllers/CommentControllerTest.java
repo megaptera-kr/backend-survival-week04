@@ -1,7 +1,7 @@
 package kr.megaptera.assignment.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.megaptera.assignment.application.CommentService;
+import kr.megaptera.assignment.application.service.CommentService;
 import kr.megaptera.assignment.dtos.CommentCreateRequestDTO;
 import kr.megaptera.assignment.dtos.CommentCreateResponseDTO;
 import kr.megaptera.assignment.dtos.CommentDeleteResponseDTO;
@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
