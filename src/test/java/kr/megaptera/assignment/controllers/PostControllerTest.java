@@ -1,7 +1,7 @@
 package kr.megaptera.assignment.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.megaptera.assignment.application.PostService;
+import kr.megaptera.assignment.application.service.PostService;
 import kr.megaptera.assignment.dtos.PostCreateRequestDTO;
 import kr.megaptera.assignment.dtos.PostCreateResponseDTO;
 import kr.megaptera.assignment.dtos.PostDeleteResponseDTO;
