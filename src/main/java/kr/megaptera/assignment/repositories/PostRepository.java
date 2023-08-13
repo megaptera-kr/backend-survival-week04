@@ -35,11 +35,7 @@ public class PostRepository implements CRUDRepository<Post, PostId> {
 
     @Override
     public boolean exists(PostId postId) {
-        Post post = map.get(postId);
-        if (Objects.isNull(post)) {
-            throw new PostNotFoundException();
-        }
-        return true;
+        return map.containsKey(postId);
     }
 
     @Override
