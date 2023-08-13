@@ -36,13 +36,7 @@ public class CommentRepository implements CRUDRepository<Comment, CommentId> {
 
     @Override
     public boolean exists(CommentId commentId) {
-        Comment comment = map.get(commentId);
-
-        if (Objects.isNull(comment)) {
-            throw new CommentNotFoundException();
-        }
-
-        return true;
+        return map.containsKey(commentId);
     }
 
     @Override
