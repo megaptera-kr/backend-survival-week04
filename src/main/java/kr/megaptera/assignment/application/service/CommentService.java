@@ -10,6 +10,7 @@ import kr.megaptera.assignment.dtos.CommentGetResponseDTO;
 import kr.megaptera.assignment.dtos.CommentUpdateRequestDTO;
 import kr.megaptera.assignment.dtos.CommentUpdateResponseDTO;
 import kr.megaptera.assignment.exceptions.CommentNotFoundException;
+import kr.megaptera.assignment.exceptions.PostNotFoundException;
 import kr.megaptera.assignment.repositories.CommentRepository;
 import kr.megaptera.assignment.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,9 @@ public class CommentService {
     public CommentCreateResponseDTO create(String id,
                                            CommentCreateRequestDTO requestDTO) {
         PostId postId = PostId.of(id);
-        postRepository.exists(postId);
+        if (!postRepository.exists(postId)) {
+            throw new PostNotFoundException();
+        }
         Comment comment = commentRepository.save(requestDTO.toEntity());
         comment.setPostId(PostId.copy(postId));
 
@@ -45,7 +48,9 @@ public class CommentService {
                                            CommentUpdateRequestDTO requestDTO) {
         CommentId commentId = CommentId.of(commentIdStr);
         PostId postId = PostId.of(postIdStr);
-        postRepository.exists(postId);
+        if (!postRepository.exists(postId)) {
+            throw new PostNotFoundException();
+        }
         Comment comment = commentRepository.findById(commentId);
 
         if (!comment.getPostId().equals(postId)) {
