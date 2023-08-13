@@ -1,8 +1,10 @@
 package kr.megaptera.assignment.application.service;
 
 import kr.megaptera.assignment.application.domain.Comment;
+import kr.megaptera.assignment.application.domain.CommentId;
 import kr.megaptera.assignment.application.domain.Post;
 import kr.megaptera.assignment.application.domain.PostId;
+import kr.megaptera.assignment.dtos.CommentDeleteResponseDTO;
 import kr.megaptera.assignment.dtos.CommentGetResponseDTO;
 import kr.megaptera.assignment.dtos.CommentUpdateRequestDTO;
 import kr.megaptera.assignment.dtos.CommentUpdateResponseDTO;
@@ -17,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 @SpringBootTest
@@ -113,5 +117,40 @@ class CommentServiceTest {
                 .hasFieldOrPropertyWithValue("id", savedComment1.getId().toString())
                 .hasFieldOrPropertyWithValue("content", changedContent)
                 .hasFieldOrPropertyWithValue("author", author);
+    }
+
+    @DisplayName("댓글 삭제에 성공한다")
+    @Test
+    void delete() {
+        // given
+        Post post = Post.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build();
+        Post savedPost = postRepository.save(post);
+
+        String author = "author";
+        String content = "content";
+        Comment comment = Comment.builder()
+                .author(author)
+                .content(content)
+                .postId(savedPost.getId())
+                .build();
+        Comment savedComment = commentRepository.save(comment);
+        comment.setPostId(post.getId());
+
+        // when
+        String commentId = savedComment.getId().toString();
+        CommentDeleteResponseDTO responseDTO
+                = commentService.delete(commentId, savedPost.getId().toString());
+
+        // then
+        Assertions.assertThat(responseDTO)
+                .hasFieldOrPropertyWithValue("id", commentId)
+                .hasFieldOrPropertyWithValue("author", author)
+                .hasFieldOrPropertyWithValue("content", content);
+        assertFalse(commentRepository.exists(CommentId.of(commentId)));
+
     }
 }
