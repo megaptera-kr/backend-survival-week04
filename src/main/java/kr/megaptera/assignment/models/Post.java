@@ -20,6 +20,11 @@ public class Post {
         this.content = content;
     }
 
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public PostId id() {
         return id;
     }
@@ -36,8 +41,4 @@ public class Post {
         return content;
     }
 
-    public void update(String title, String content){
-        this.title = title;
-        this.content = content;
-    }
 }

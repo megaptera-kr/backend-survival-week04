@@ -1,24 +1,31 @@
 package kr.megaptera.assignment.dtos;
 
-public class PostCreateDto {
-    private String title;
+import kr.megaptera.assignment.models.Comment;
+
+public class CommentDto {
+    private String id;
     private String author;
     private String content;
 
+    public CommentDto() {
+    }
 
-    public PostCreateDto(String title, String author, String content) {
-        this.title = title;
+    public CommentDto(String id, String author, String content) {
+        this.id = id;
         this.author = author;
         this.content = content;
     }
 
-
-    public String getTitle() {
-        return title;
+    public CommentDto(Comment comment) {
+        this(comment.id().toString(), comment.author(), comment.content());
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAuthor() {

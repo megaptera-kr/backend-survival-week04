@@ -1,7 +1,5 @@
 package kr.megaptera.assignment.dtos;
 
-import kr.megaptera.assignment.models.Post;
-
 public class PostUpdateDto {
     private String title;
     private String content;
@@ -11,11 +9,6 @@ public class PostUpdateDto {
         this.title = title;
         this.content = content;
     }
-
-    public PostUpdateDto(Post post) {
-        this(post.title(), post.content());
-    }
-
 
 
     public String getTitle() {
