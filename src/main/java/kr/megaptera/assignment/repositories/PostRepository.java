@@ -39,4 +39,9 @@ public class PostRepository {
     public void save(Post post) {
         posts.put(post.id(), post);
     }
+
+    public Post remove(PostId id) {
+        Post post = posts.remove(id);
+        return post;
+    }
 }

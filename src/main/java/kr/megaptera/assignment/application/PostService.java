@@ -47,4 +47,10 @@ public class PostService {
 
         return new PostDto(post);
     }
+
+    public PostDto deletePostDto(String id) {
+        Post post = postRepository.remove(PostId.of(id));
+
+        return new PostDto(post);
+    }
 }
