@@ -1,6 +1,7 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.domain.Post;
+import kr.megaptera.assignment.model.Post;
+import kr.megaptera.assignment.model.PostId;
 import kr.megaptera.assignment.dto.PostDto;
 import kr.megaptera.assignment.repositories.PostRepository;
 
@@ -18,5 +19,10 @@ public class PostService {
         List<Post> posts = postRepository.findAll();
 
         return posts.stream().map(post -> new PostDto(post)).toList();
+    }
+
+    public PostDto getPostDto(String id) {
+        Post post = postRepository.find(PostId.of(id));
+        return new PostDto(post);
     }
 }

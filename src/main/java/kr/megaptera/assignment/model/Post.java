@@ -1,4 +1,4 @@
-package kr.megaptera.assignment.domain;
+package kr.megaptera.assignment.model;
 
 public class Post {
     private PostId id;
@@ -14,6 +14,7 @@ public class Post {
     }
 
     public Post(SingleLineText title, SingleLineText author, MultiLineText content) {
+        this.id = new PostId("99");
         this.title = title;
         this.author = author;
         this.content = content;

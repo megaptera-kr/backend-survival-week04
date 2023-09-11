@@ -1,5 +1,6 @@
 package kr.megaptera.assignment.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dto.PostDto;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,13 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public void getDetail(@PathVariable String id) {
+    public PostDto getDetail(@PathVariable String id) {
+        PostDto postDto = postService.getPostDto(id);
+        return postDto;
     }
 
     @PostMapping
-    public void create(@RequestBody PostDto postDto) {
+    public void create(@RequestBody PostDto postDto)  {
     }
 
     @PutMapping("{id}")

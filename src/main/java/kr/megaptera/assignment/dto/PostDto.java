@@ -1,6 +1,6 @@
 package kr.megaptera.assignment.dto;
 
-import kr.megaptera.assignment.domain.Post;
+import kr.megaptera.assignment.model.Post;
 
 public class PostDto {
     private String id;

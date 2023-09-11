@@ -1,7 +1,8 @@
-package kr.megaptera.assignment.domain;
+package kr.megaptera.assignment.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MultiLineText {
@@ -17,7 +18,18 @@ public class MultiLineText {
 
     @Override
     public String toString() {
-        return lines.stream().collect(Collectors.joining("\n"));
+        return String.join("\n", lines);
+    }
+    @Override
+    public boolean equals(Object other) {
+        MultiLineText multilineText = (MultiLineText) other;
+
+        return Objects.equals(lines, multilineText.lines);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lines);
     }
 
 }
