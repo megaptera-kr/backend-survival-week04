@@ -35,4 +35,8 @@ public class PostRepository {
         }
         return post;
     }
+
+    public void save(Post post) {
+        posts.put(post.id(), post);
+    }
 }

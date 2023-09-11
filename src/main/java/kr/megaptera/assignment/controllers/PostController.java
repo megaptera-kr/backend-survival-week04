@@ -40,7 +40,10 @@ public class PostController {
     }
 
     @PostMapping
-    public void create(@RequestBody PostDto postDto)  {
+    public PostDto create(@RequestBody PostDto postDto)  {
+        PostDto created = postService.createPostDto(postDto);
+
+        return created;
     }
 
     @PutMapping("{id}")
