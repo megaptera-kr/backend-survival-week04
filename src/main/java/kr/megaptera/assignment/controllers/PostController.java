@@ -46,9 +46,12 @@ public class PostController {
         return created;
     }
 
-    @PutMapping("{id}")
-    public void update(@PathVariable String id,
+    @PutMapping("/{id}")
+    public PostDto update(@PathVariable String id,
                           @RequestBody PostDto postDto) {
+        PostDto updated = postService.updatePostDto(id, postDto);
+
+        return updated;
     }
 
     @DeleteMapping("/{id}")

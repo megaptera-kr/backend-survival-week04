@@ -36,4 +36,15 @@ public class PostService {
         postRepository.save(post);
         return new PostDto(post);
     }
+
+    public PostDto updatePostDto(String id, PostDto postDto) {
+        Post post = postRepository.find(PostId.of(id));
+        post.update(
+                SingleLineText.of(postDto.getTitle()),
+                SingleLineText.of(postDto.getAuthor()),
+                MultiLineText.of(postDto.getContent())
+        );
+
+        return new PostDto(post);
+    }
 }

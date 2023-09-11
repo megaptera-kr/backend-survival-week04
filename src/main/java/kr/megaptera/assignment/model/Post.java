@@ -35,4 +35,12 @@ public class Post {
     public MultiLineText content() {
         return content;
     }
+
+    public void update(SingleLineText title,
+                       SingleLineText author,
+                       MultiLineText content) {
+        this.title = title;
+        this.author = author;
+        this.content = content;
+    }
 }
