@@ -1,16 +1,13 @@
 package kr.megaptera.assignment.controllers;
 
 import kr.megaptera.assignment.application.CommentService;
-import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dto.CommentDto;
-import kr.megaptera.assignment.model.PostId;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,25 +27,27 @@ public class CommentController {
 
     @GetMapping
     public List<CommentDto> getList(@RequestParam String postId) {
-        List<CommentDto> commentDto = commentService.getCommentDto(postId);
-        return commentDto;
+        List<CommentDto> commentDtos = commentService.getCommentDto(postId);
+        return commentDtos;
     }
 
     @PostMapping
     public CommentDto create(@RequestBody CommentDto commentDto,
-                       @RequestParam PostId postId) {
+                       @RequestParam String postId) {
         CommentDto created = commentService.createComment(commentDto, postId);
 
         return created;
     }
 
-    @PutMapping("/{id}")
-    public void update() {
-
+    @PatchMapping("/{id}")
+    public CommentDto update(@RequestBody CommentDto commentDto,
+                       @PathVariable String id) {
+        CommentDto updated = commentService.updateComment(commentDto, id);
+        return updated;
     }
 
     @DeleteMapping("/{id}")
-    public void delete() {
-
+    public void delete(@PathVariable String id) {
+        commentService.deleteComment(id);
     }
 }

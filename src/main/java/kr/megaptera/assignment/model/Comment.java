@@ -1,5 +1,7 @@
 package kr.megaptera.assignment.model;
 
+import java.util.UUID;
+
 public class Comment {
     private CommentId id;
     private PostId postId;
@@ -14,7 +16,7 @@ public class Comment {
     }
 
     public Comment(PostId postId, SingleLineText author, MultiLineText content) {
-        this.id = new CommentId("99");
+        this.id = CommentId.of(UUID.randomUUID().toString().replace("-", ""));
         this.postId = postId;
         this.author = author;
         this.content = content;
@@ -34,5 +36,10 @@ public class Comment {
 
     public MultiLineText content(){
         return content;
+    }
+
+    public void update(SingleLineText author, MultiLineText content) {
+        this.author = author;
+        this.content = content;
     }
 }

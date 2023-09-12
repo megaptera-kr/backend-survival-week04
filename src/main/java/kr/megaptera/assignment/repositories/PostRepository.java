@@ -17,10 +17,10 @@ public class PostRepository {
     public PostRepository() {
         this.posts = new HashMap<>();
 
-        this.posts.put(PostId.of("1"),
-                new Post(PostId.of("1"), SingleLineText.of("제목"), SingleLineText.of("작가"), MultiLineText.of("나는\n천재인가\n")));
-        this.posts.put(PostId.of("2"),
-                new Post(PostId.of("2"), SingleLineText.of("제목2"), SingleLineText.of("작가2"), MultiLineText.of("나는\n바보인가\n")));
+//        this.posts.put(PostId.of("1"),
+//                new Post(PostId.of("1"), SingleLineText.of("제목"), SingleLineText.of("작가"), MultiLineText.of("나는\n천재인가\n")));
+//        this.posts.put(PostId.of("2"),
+//                new Post(PostId.of("2"), SingleLineText.of("제목2"), SingleLineText.of("작가2"), MultiLineText.of("나는\n바보인가\n")));
     }
 
     public List<Post> findAll() {

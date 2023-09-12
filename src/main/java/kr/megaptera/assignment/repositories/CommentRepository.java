@@ -1,5 +1,6 @@
 package kr.megaptera.assignment.repositories;
 
+import kr.megaptera.assignment.exception.PostNotFound;
 import kr.megaptera.assignment.model.Comment;
 import kr.megaptera.assignment.model.CommentId;
 import kr.megaptera.assignment.model.MultiLineText;
@@ -17,8 +18,17 @@ public class CommentRepository {
     public CommentRepository() {
         this.comments = new HashMap<>();
 
-        this.comments.put(CommentId.of("1"),
-                new Comment(CommentId.of("1"), PostId.of("1"), SingleLineText.of("최소현"), MultiLineText.of("잘 보고갑니당\n")));
+//        this.comments.put(CommentId.of("1"),
+//                new Comment(CommentId.of("1"), PostId.of("1"), SingleLineText.of("최소현"), MultiLineText.of("잘 보고갑니당\n")));
+    }
+
+    public Comment find(CommentId id) {
+        Comment comment = comments.get(id);
+
+        if (comment == null){
+            throw new PostNotFound();
+        }
+        return comment;
     }
 
     public List<Comment> findAll(String postId) {
@@ -32,5 +42,9 @@ public class CommentRepository {
 
     public void save(Comment comment) {
         comments.put(comment.id(), comment);
+    }
+
+    public void remove(CommentId id) {
+        comments.remove(id);
     }
 }
