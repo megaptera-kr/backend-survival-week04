@@ -25,13 +25,13 @@ public class PostService {
 
     public PostResponseDto get(String id) {
         Post post = postRepository.findPost(id);
-        return new PostResponseDto(post.getId(),post.getTitle(),post.getAuthor(),post.getTitle());
+        return new PostResponseDto(post.getId(),post.getTitle(),post.getAuthor(),post.getContent());
     }
 
     public PostResponseDto create(PostCreateDto postCreateDto) {
         Post post = new Post(postCreateDto.title(),postCreateDto.author(),postCreateDto.content());
         Post savedPost = postRepository.save(post);
-        return new PostResponseDto(savedPost.getId(), savedPost.getTitle(), savedPost.getAuthor(),savedPost.getTitle());
+        return new PostResponseDto(savedPost.getId(), savedPost.getTitle(), savedPost.getAuthor(),savedPost.getContent());
     }
 
     public PostResponseDto update(String id, PostUpdateDto postUpdateDto) {
@@ -46,11 +46,11 @@ public class PostService {
         }
 
         Post UpdatedPost = postRepository.update(post);
-        return new PostResponseDto(UpdatedPost.getId(), UpdatedPost.getTitle(), UpdatedPost.getAuthor(),UpdatedPost.getTitle());
+        return new PostResponseDto(UpdatedPost.getId(), UpdatedPost.getTitle(), UpdatedPost.getAuthor(),UpdatedPost.getContent());
     }
 
     public PostResponseDto delete(String id) {
         Post deletedPost = postRepository.delete(id);
-        return new PostResponseDto(deletedPost.getId(), deletedPost.getTitle(), deletedPost.getAuthor(),deletedPost.getTitle());
+        return new PostResponseDto(deletedPost.getId(), deletedPost.getTitle(), deletedPost.getAuthor(),deletedPost.getContent());
     }
 }
