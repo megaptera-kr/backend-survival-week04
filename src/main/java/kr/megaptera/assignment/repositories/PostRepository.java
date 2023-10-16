@@ -17,11 +17,6 @@ public class PostRepository {
 
     public PostRepository() {
         this.posts = new HashMap<>();
-        this.posts.put(new PostId("1"),new Post(
-            new PostId("1")
-            ,"title"
-            ,"author"
-            ,new MultilineText("content")));
     }
 
     public List<Post> findAll() {
