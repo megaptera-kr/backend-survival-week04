@@ -1,7 +1,6 @@
 package kr.megaptera.assignment.models;
 
 import com.github.f4b6a3.tsid.TsidCreator;
-import kr.megaptera.assignment.dtos.PostDto;
 
 public class Post {
     private PostId id;
@@ -16,16 +15,19 @@ public class Post {
         this.content = content;
     }
 
-    public PostId id(){
+    public PostId id() {
         return id;
     }
-    public PostTitle title(){
+
+    public PostTitle title() {
         return title;
     }
-    public PostAuthor author(){
+
+    public PostAuthor author() {
         return author;
     }
-    public MultilineText content(){
+
+    public MultilineText content() {
         return content;
     }
 
