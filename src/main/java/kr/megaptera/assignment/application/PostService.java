@@ -1,62 +1,62 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.daos.post.PostDAO;
-import kr.megaptera.assignment.daos.post.PostMapDAO;
+import kr.megaptera.assignment.domain.post.MultilineText;
+import kr.megaptera.assignment.domain.post.Post;
+import kr.megaptera.assignment.domain.post.PostId;
 import kr.megaptera.assignment.dtos.post.PostCreateDto;
 import kr.megaptera.assignment.dtos.post.PostDto;
 import kr.megaptera.assignment.dtos.post.PostUpdateDto;
+import kr.megaptera.assignment.repositories.PostRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 public class PostService {
 
-    private final PostDAO postDAO;
+    private final PostRepository postRepository;
 
     public PostService() {
-        postDAO = new PostMapDAO();
+        postRepository = new PostRepository();
     }
 
     public List<PostDto> getPostDtos() {
-        return postDAO.findAll();
+        List<Post> posts = postRepository.findAll();
+        return posts.stream().map(post -> new PostDto(post)).toList();
     }
 
     public PostDto getPostDto(String id) {
-        return postDAO.find(id);
+        Post post = postRepository.find(PostId.of(id));
+
+        return new PostDto(post);
     }
 
     public PostDto createPostDto(PostCreateDto postCreateDto) {
-        PostDto postDto = new PostDto(
-                generateId(),
+        Post post = new Post(
                 postCreateDto.getTitle(),
                 postCreateDto.getAuthor(),
-                postCreateDto.getContent()
+                MultilineText.of(postCreateDto.getContent())
         );
 
-        postDAO.save(postDto);
+        postRepository.save(post);
 
-        return postDto;
+        return new PostDto(post);
     }
 
     public PostDto updatePostDto(String id, PostUpdateDto postUpdateDto) {
-        PostDto postDto = postDAO.find(id);
+        Post post = postRepository.find(PostId.of(id));
 
-        postDto.setTitle(postUpdateDto.getTitle());
-        postDto.setContent(postUpdateDto.getContent());
+        post.update(
+                postUpdateDto.getTitle(),
+                MultilineText.of(postUpdateDto.getContent())
+        );
 
-        return postDto;
+        return new PostDto(post);
     }
 
     public PostDto deletePostDto(String id) {
-        PostDto postDto = postDAO.find(id);
+        Post post = postRepository.find(PostId.of(id));
 
-        postDAO.delete(id);
+        postRepository.delete(PostId.of(id));
 
-        return postDto;
-    }
-
-    private String generateId() {
-        //TODO: TSID 도입
-        return UUID.randomUUID().toString();
+        return new PostDto(post);
     }
 }

@@ -1,56 +1,54 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.daos.comment.CommentDAO;
-import kr.megaptera.assignment.daos.comment.CommentMapDAO;
+import kr.megaptera.assignment.domain.comment.Comment;
+import kr.megaptera.assignment.domain.comment.CommentId;
+import kr.megaptera.assignment.domain.post.MultilineText;
+import kr.megaptera.assignment.domain.post.PostId;
 import kr.megaptera.assignment.dtos.comment.CommentCreateDto;
 import kr.megaptera.assignment.dtos.comment.CommentDto;
 import kr.megaptera.assignment.dtos.comment.CommentUpdateDto;
+import kr.megaptera.assignment.repositories.CommentRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 public class CommentService {
 
-    private final CommentDAO commentDAO;
+    private final CommentRepository commentRepository;
 
     public CommentService() {
-        commentDAO = new CommentMapDAO();
+        commentRepository = new CommentRepository();
     }
 
     public List<CommentDto> getCommentDtos(String postId) {
-        return commentDAO.findAll(postId);
+        List<Comment> comments = commentRepository.findAll(PostId.of(postId));
+
+        return comments.stream().map(comment -> new CommentDto(comment)).toList();
     }
 
     public CommentDto createCommentDto(String postId, CommentCreateDto commentCreateDto) {
-        CommentDto commentDto = new CommentDto(
-                generateId(),
+        Comment comment = new Comment(
                 commentCreateDto.getAuthor(),
-                commentCreateDto.getContent()
+                MultilineText.of(commentCreateDto.getContent())
         );
 
-        commentDAO.save(postId, commentDto);
+        commentRepository.save(PostId.of(postId), comment);
 
-        return commentDto;
+        return new CommentDto(comment);
     }
 
     public CommentDto updateCommentDto(String id, String postId, CommentUpdateDto commentUpdateDto) {
-        CommentDto commentDto = commentDAO.find(id, postId);
+        Comment comment = commentRepository.find(CommentId.of(id), PostId.of(postId));
 
-        commentDto.setContent(commentUpdateDto.getContent());
+        comment.update(MultilineText.of(commentUpdateDto.getContent()));
 
-        return commentDto;
+        return new CommentDto(comment);
     }
 
     public CommentDto deleteCommentDto(String id, String postId) {
-        CommentDto commentDto = commentDAO.find(id, postId);
+        Comment comment = commentRepository.find(CommentId.of(id), PostId.of(postId));
 
-        commentDAO.delete(postId, commentDto);
+        commentRepository.delete(PostId.of(postId), comment);
 
-        return commentDto;
-    }
-
-    private String generateId() {
-        // TODO: TSID 도입
-        return UUID.randomUUID().toString();
+        return new CommentDto(comment);
     }
 }

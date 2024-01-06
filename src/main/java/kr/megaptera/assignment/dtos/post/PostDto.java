@@ -1,5 +1,7 @@
 package kr.megaptera.assignment.dtos.post;
 
+import kr.megaptera.assignment.domain.post.Post;
+
 public class PostDto {
 
     private String id;
@@ -7,11 +9,18 @@ public class PostDto {
     private String author;
     private String content;
 
+    public PostDto() {
+    }
+
     public PostDto(String id, String title, String author, String content) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.content = content;
+    }
+
+    public PostDto(Post post) {
+        this(post.id().toString(), post.title(), post.author(), post.content().toString());
     }
 
     public String getId() {
