@@ -1,4 +1,4 @@
-package kr.megaptera.assignment.dtos;
+package kr.megaptera.assignment.dtos.comment;
 
 public class CommentUpdateDto {
 

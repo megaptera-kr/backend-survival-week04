@@ -1,15 +1,13 @@
-package kr.megaptera.assignment.dtos;
+package kr.megaptera.assignment.dtos.comment;
 
-public class PostDto {
+public class CommentDto {
 
     private String id;
-    private String title;
     private String author;
     private String content;
 
-    public PostDto(String id, String title, String author, String content) {
+    public CommentDto(String id, String author, String content) {
         this.id = id;
-        this.title = title;
         this.author = author;
         this.content = content;
     }
@@ -20,14 +18,6 @@ public class PostDto {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getAuthor() {

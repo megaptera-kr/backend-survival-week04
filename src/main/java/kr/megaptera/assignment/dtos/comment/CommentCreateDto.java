@@ -1,23 +1,14 @@
-package kr.megaptera.assignment.dtos;
+package kr.megaptera.assignment.dtos.comment;
 
-public class CommentDto {
+public class CommentCreateDto {
 
-    private String id;
     private String author;
+
     private String content;
 
-    public CommentDto(String id, String author, String content) {
-        this.id = id;
+    public CommentCreateDto(String author, String content) {
         this.author = author;
         this.content = content;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getAuthor() {

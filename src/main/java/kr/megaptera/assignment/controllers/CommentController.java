@@ -1,9 +1,9 @@
 package kr.megaptera.assignment.controllers;
 
 import kr.megaptera.assignment.application.CommentService;
-import kr.megaptera.assignment.dtos.CommentCreateDto;
-import kr.megaptera.assignment.dtos.CommentDto;
-import kr.megaptera.assignment.dtos.CommentUpdateDto;
+import kr.megaptera.assignment.dtos.comment.CommentCreateDto;
+import kr.megaptera.assignment.dtos.comment.CommentDto;
+import kr.megaptera.assignment.dtos.comment.CommentUpdateDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

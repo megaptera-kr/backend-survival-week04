@@ -1,23 +1,24 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.dtos.CommentCreateDto;
-import kr.megaptera.assignment.dtos.CommentDto;
-import kr.megaptera.assignment.dtos.CommentUpdateDto;
+import kr.megaptera.assignment.daos.comment.CommentDAO;
+import kr.megaptera.assignment.daos.comment.CommentMapDAO;
+import kr.megaptera.assignment.dtos.comment.CommentCreateDto;
+import kr.megaptera.assignment.dtos.comment.CommentDto;
+import kr.megaptera.assignment.dtos.comment.CommentUpdateDto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class CommentService {
 
-    private Map<String, List<CommentDto>> commentDtos = new HashMap<>();
+    private final CommentDAO commentDAO;
+
+    public CommentService() {
+        commentDAO = new CommentMapDAO();
+    }
 
     public List<CommentDto> getCommentDtos(String postId) {
-        List<CommentDto> list = commentDtos.getOrDefault(postId, new ArrayList<>());
-
-        return list;
+        return commentDAO.findAll(postId);
     }
 
     public CommentDto createCommentDto(String postId, CommentCreateDto commentCreateDto) {
@@ -27,17 +28,13 @@ public class CommentService {
                 commentCreateDto.getContent()
         );
 
-        if (commentDtos.get(postId) == null) {
-            commentDtos.put(postId, new ArrayList<CommentDto>());
-        }
-
-        commentDtos.get(postId).add(commentDto);
+        commentDAO.save(postId, commentDto);
 
         return commentDto;
     }
 
     public CommentDto updateCommentDto(String id, String postId, CommentUpdateDto commentUpdateDto) {
-        CommentDto commentDto = findCommentDto(id, postId);
+        CommentDto commentDto = commentDAO.find(id, postId);
 
         commentDto.setContent(commentUpdateDto.getContent());
 
@@ -45,18 +42,11 @@ public class CommentService {
     }
 
     public CommentDto deleteCommentDto(String id, String postId) {
-        CommentDto commentDto = findCommentDto(id, postId);
+        CommentDto commentDto = commentDAO.find(id, postId);
 
-        commentDtos.get(postId).remove(commentDto);
+        commentDAO.delete(postId, commentDto);
 
         return commentDto;
-    }
-
-    private CommentDto findCommentDto(String id, String postId) {
-        return commentDtos.get(postId).stream()
-                .filter(comment -> comment.getId().equals(id))
-                .findFirst()
-                .get();
     }
 
     private String generateId() {

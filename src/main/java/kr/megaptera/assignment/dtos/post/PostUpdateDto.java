@@ -1,4 +1,4 @@
-package kr.megaptera.assignment.dtos;
+package kr.megaptera.assignment.dtos.post;
 
 public class PostUpdateDto {
 

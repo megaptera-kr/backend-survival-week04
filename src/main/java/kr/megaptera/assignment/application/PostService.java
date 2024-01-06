@@ -1,23 +1,28 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.dtos.PostCreateDto;
-import kr.megaptera.assignment.dtos.PostDto;
-import kr.megaptera.assignment.dtos.PostUpdateDto;
+import kr.megaptera.assignment.daos.post.PostDAO;
+import kr.megaptera.assignment.daos.post.PostMapDAO;
+import kr.megaptera.assignment.dtos.post.PostCreateDto;
+import kr.megaptera.assignment.dtos.post.PostDto;
+import kr.megaptera.assignment.dtos.post.PostUpdateDto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class PostService {
 
-    private List<PostDto> postDtos = new ArrayList<>();
+    private final PostDAO postDAO;
+
+    public PostService() {
+        postDAO = new PostMapDAO();
+    }
 
     public List<PostDto> getPostDtos() {
-        return postDtos;
+        return postDAO.findAll();
     }
 
     public PostDto getPostDto(String id) {
-        return findPostDto(id);
+        return postDAO.find(id);
     }
 
     public PostDto createPostDto(PostCreateDto postCreateDto) {
@@ -28,13 +33,13 @@ public class PostService {
                 postCreateDto.getContent()
         );
 
-        postDtos.add(postDto);
+        postDAO.save(postDto);
 
         return postDto;
     }
 
     public PostDto updatePostDto(String id, PostUpdateDto postUpdateDto) {
-        PostDto postDto = findPostDto(id);
+        PostDto postDto = postDAO.find(id);
 
         postDto.setTitle(postUpdateDto.getTitle());
         postDto.setContent(postUpdateDto.getContent());
@@ -43,18 +48,11 @@ public class PostService {
     }
 
     public PostDto deletePostDto(String id) {
-        PostDto postDto = findPostDto(id);
+        PostDto postDto = postDAO.find(id);
 
-        postDtos.remove(postDto);
+        postDAO.delete(id);
 
         return postDto;
-    }
-
-    private PostDto findPostDto(String id) {
-        return postDtos.stream()
-                .filter(post -> post.getId().equals(id))
-                .findFirst()
-                .get();
     }
 
     private String generateId() {
