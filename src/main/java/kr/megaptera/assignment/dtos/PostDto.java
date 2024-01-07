@@ -1,6 +1,6 @@
 package kr.megaptera.assignment.dtos;
 
-import kr.megaptera.assignment.models.Post.Post;
+import kr.megaptera.assignment.models.post.Post;
 
 // immutable object
 public class PostDto {
@@ -38,7 +38,7 @@ public class PostDto {
     public String getTitle() {
         return title;
     }
-    
+
     public String getContent() {
         return content;
     }

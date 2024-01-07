@@ -1,4 +1,4 @@
-package kr.megaptera.assignment.models.Post;
+package kr.megaptera.assignment.models.post;
 
 import com.github.f4b6a3.tsid.TsidCreator;
 

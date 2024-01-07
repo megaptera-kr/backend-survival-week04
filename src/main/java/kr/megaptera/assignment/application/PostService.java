@@ -1,11 +1,11 @@
 package kr.megaptera.assignment.application;
 
 import kr.megaptera.assignment.dtos.PostDto;
-import kr.megaptera.assignment.models.Post.Author;
-import kr.megaptera.assignment.models.Post.Post;
-import kr.megaptera.assignment.models.Post.PostContent;
-import kr.megaptera.assignment.models.Post.PostId;
-import kr.megaptera.assignment.models.Post.PostTitle;
+import kr.megaptera.assignment.models.post.Author;
+import kr.megaptera.assignment.models.post.Post;
+import kr.megaptera.assignment.models.post.PostContent;
+import kr.megaptera.assignment.models.post.PostId;
+import kr.megaptera.assignment.models.post.PostTitle;
 import kr.megaptera.assignment.repositories.PostRepository;
 
 import java.util.List;

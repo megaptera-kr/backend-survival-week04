@@ -1,10 +1,10 @@
 package kr.megaptera.assignment.repositories;
 
 import kr.megaptera.assignment.exceptions.PostNotFoundException;
-import kr.megaptera.assignment.models.Post.Post;
-import kr.megaptera.assignment.models.Post.PostContent;
-import kr.megaptera.assignment.models.Post.PostId;
-import kr.megaptera.assignment.models.Post.PostTitle;
+import kr.megaptera.assignment.models.post.Post;
+import kr.megaptera.assignment.models.post.PostContent;
+import kr.megaptera.assignment.models.post.PostId;
+import kr.megaptera.assignment.models.post.PostTitle;
 
 import java.util.HashMap;
 import java.util.List;

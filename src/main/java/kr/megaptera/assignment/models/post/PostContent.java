@@ -1,4 +1,4 @@
-package kr.megaptera.assignment.models.Post;
+package kr.megaptera.assignment.models.post;
 
 public class PostContent {
 
