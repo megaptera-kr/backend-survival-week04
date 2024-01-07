@@ -1,8 +1,8 @@
 package kr.megaptera.assignment.application;
 
 import kr.megaptera.assignment.dtos.PostDto;
-import kr.megaptera.assignment.models.post.Author;
 import kr.megaptera.assignment.models.post.Post;
+import kr.megaptera.assignment.models.post.PostAuthor;
 import kr.megaptera.assignment.models.post.PostContent;
 import kr.megaptera.assignment.models.post.PostId;
 import kr.megaptera.assignment.models.post.PostTitle;
@@ -38,7 +38,7 @@ public class PostService {
         // create post
         Post post = new Post(
                 PostTitle.of(postDto.getTitle()),
-                Author.of(postDto.getAuthor()),
+                PostAuthor.of(postDto.getAuthor()),
                 PostContent.of(postDto.getContent())
         );
 

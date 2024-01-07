@@ -1,15 +1,15 @@
 package kr.megaptera.assignment.models.post;
 
-public class Author {
+public class PostAuthor {
 
     private final String value;
 
-    private Author(String value) {
+    private PostAuthor(String value) {
         this.value = value;
     }
 
-    public static Author of(String value) {
-        return new Author(value);
+    public static PostAuthor of(String value) {
+        return new PostAuthor(value);
     }
 
     @Override

@@ -2,14 +2,14 @@ package kr.megaptera.assignment.models.post;
 
 public class Post {
     private final PostId id;
-    private final Author author;
+    private final PostAuthor postAuthor;
     private PostTitle title;
 
     private PostContent content;
 
-    public Post(PostTitle title, Author author, PostContent content) {
+    public Post(PostTitle title, PostAuthor postAuthor, PostContent content) {
         this.id = PostId.generate();
-        this.author = author;
+        this.postAuthor = postAuthor;
         this.title = title;
         this.content = content;
     }
@@ -18,8 +18,8 @@ public class Post {
         return id;
     }
 
-    public Author author() {
-        return author;
+    public PostAuthor author() {
+        return postAuthor;
     }
 
     public PostTitle title() {
