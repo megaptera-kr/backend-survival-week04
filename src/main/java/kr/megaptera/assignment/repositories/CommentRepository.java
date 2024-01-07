@@ -24,20 +24,21 @@ public class CommentRepository {
             throw new PostNotFoundException();
         }
         Map<CommentId, Comment> commentMap = repository.get(postId);
-        return commentMap.values()
-                .stream()
-                .toList();
+        return List.copyOf(
+                commentMap.values()
+                        .stream()
+                        .toList()
+        );
     }
 
     public void save(PostId postId, Comment comment) {
-
-        // PostID 유효성 검사? 실제로 PostRepository에서 PostId가 유효한지 검사하는 것이 맞는 것 같다.
         Map<CommentId, Comment> commentMap = repository.get(postId);
-        // 처음 댓글을 달 때
+
         if (commentMap == null) {
             commentMap = new HashMap<>();
             repository.put(postId, commentMap);
         }
+        
         commentMap.put(comment.id(), comment);
     }
 
@@ -48,11 +49,11 @@ public class CommentRepository {
 
         Map<CommentId, Comment> commentMap = repository.get(postId);
 
-        Comment target = getComment(commentMap, commentId);
+        Comment comment = getComment(commentMap, commentId);
 
-        target.update(commentContent);
+        comment.update(commentContent);
 
-        return target;
+        return comment;
     }
 
     public Comment delete(PostId postId, CommentId commentId) {
@@ -62,11 +63,11 @@ public class CommentRepository {
 
         Map<CommentId, Comment> commentMap = repository.get(postId);
 
-        Comment target = getComment(commentMap, commentId);
+        Comment comment = getComment(commentMap, commentId);
 
         commentMap.remove(commentId);
 
-        return target;
+        return comment;
     }
 
     private Comment getComment(Map<CommentId, Comment> commentMap, CommentId commentId) {

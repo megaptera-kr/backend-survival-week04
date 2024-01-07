@@ -30,35 +30,30 @@ public class PostController {
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<PostDto> list() {
-        // get all postDtos from postService
         return this.postService.list();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PostDto detail(@PathVariable String id) {
-        // get postDto from postService
         return this.postService.detail(id);
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public PostDto create(@RequestBody PostDto postDto) {
-        // create postDto from postService
         return this.postService.create(postDto);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PostDto update(@PathVariable String id, @RequestBody PostDto postDto) {
-        // update postDto from postService
         return this.postService.update(id, postDto);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public PostDto delete(@PathVariable String id) {
-        // delete postDto from postService
         return this.postService.delete(id);
     }
 

@@ -2,7 +2,6 @@ package kr.megaptera.assignment.dtos;
 
 import kr.megaptera.assignment.models.post.Post;
 
-// immutable object
 public class PostDto {
 
     private final String id;
@@ -10,8 +9,6 @@ public class PostDto {
     private final String title;
     private final String content;
 
-    // constructor injection
-    // Json String -> PostDto
     public PostDto(String id, String author, String title, String content) {
         this.id = id;
         this.author = author;

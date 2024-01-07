@@ -15,7 +15,6 @@ public class PostRepository {
     private final Map<PostId, Post> repository = new HashMap<>();
 
     public List<Post> findAll() {
-        // return immutable list
         return List.copyOf(repository.values());
     }
 
@@ -24,17 +23,14 @@ public class PostRepository {
         if (post == null) {
             throw new PostNotFoundException();
         }
-        // return post
         return post;
     }
 
     public void save(Post post) {
-        // save post
         repository.put(post.id(), post);
     }
 
     public Post update(PostId postId, PostTitle postTitle, PostContent postContent) {
-        // update post
         Post post = repository.get(postId);
         if (post == null) {
             throw new PostNotFoundException();
@@ -44,7 +40,6 @@ public class PostRepository {
     }
 
     public Post delete(PostId id) {
-        // delete post
         Post post = repository.remove(id);
         if (post == null) {
             throw new PostNotFoundException();

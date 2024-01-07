@@ -32,7 +32,6 @@ public class CommentController {
     @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> list(@RequestParam(name = "postId") String postId) {
-        // get all commentDtos from commentService
         return this.commentService.list(postId);
     }
 
@@ -42,7 +41,6 @@ public class CommentController {
             @RequestParam(name = "postId") String postId,
             @RequestBody CommentDto commentDto
     ) {
-        // create commentDto from commentService
         return this.commentService.create(postId, commentDto);
     }
 
@@ -53,7 +51,6 @@ public class CommentController {
             @RequestParam(name = "postId") String postId,
             @RequestBody CommentDto commentDto
     ) {
-        // update commentDto from commentService
         return this.commentService.update(postId, id, commentDto);
     }
 
@@ -62,7 +59,6 @@ public class CommentController {
     public CommentDto delete(@PathVariable String id,
                              @RequestParam(name = "postId") String postId
     ) {
-        // delete commentDto from commentService
         return this.commentService.delete(postId, id);
     }
 
