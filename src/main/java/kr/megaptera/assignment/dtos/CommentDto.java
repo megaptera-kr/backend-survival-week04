@@ -4,8 +4,8 @@ import kr.megaptera.assignment.models.comment.Comment;
 
 public class CommentDto {
 
-    private String id;
-    private String author;
+    private final String id;
+    private final String author;
     private String content;
 
     public CommentDto(String id, String author, String content) {
@@ -15,7 +15,7 @@ public class CommentDto {
     }
 
     public CommentDto(Comment comment) {
-        this(comment.id().toString(), comment.author().toString(), comment.content().toString());
+        this(comment.commentId().toString(), comment.commentAuthor().toString(), comment.commentContent().toString());
     }
 
     public String getId() {

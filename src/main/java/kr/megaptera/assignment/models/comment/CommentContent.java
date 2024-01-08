@@ -2,7 +2,7 @@ package kr.megaptera.assignment.models.comment;
 
 public class CommentContent {
 
-    private final String value;
+    private String value;
 
     private CommentContent(String value) {
         this.value = value;

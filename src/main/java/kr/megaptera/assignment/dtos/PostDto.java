@@ -6,8 +6,8 @@ public class PostDto {
 
     private final String id;
     private final String author;
-    private final String title;
-    private final String content;
+    private String title;
+    private String content;
 
     public PostDto(String id, String author, String title, String content) {
         this.id = id;

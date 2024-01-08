@@ -20,10 +20,7 @@ public class CommentRepository {
     }
 
     public List<Comment> findAllByPostId(PostId postId) {
-        if (!repository.containsKey(postId)) {
-            throw new PostNotFoundException();
-        }
-        Map<CommentId, Comment> commentMap = repository.get(postId);
+        Map<CommentId, Comment> commentMap = repository.computeIfAbsent(postId, key -> new HashMap<>());
         return List.copyOf(
                 commentMap.values()
                         .stream()
@@ -32,14 +29,8 @@ public class CommentRepository {
     }
 
     public void save(PostId postId, Comment comment) {
-        Map<CommentId, Comment> commentMap = repository.get(postId);
-
-        if (commentMap == null) {
-            commentMap = new HashMap<>();
-            repository.put(postId, commentMap);
-        }
-        
-        commentMap.put(comment.id(), comment);
+        Map<CommentId, Comment> commentMap = repository.computeIfAbsent(postId, key -> new HashMap<>());
+        commentMap.put(comment.commentId(), comment);
     }
 
     public Comment update(PostId postId, CommentId commentId, CommentContent commentContent) {

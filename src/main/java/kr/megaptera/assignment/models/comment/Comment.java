@@ -2,29 +2,29 @@ package kr.megaptera.assignment.models.comment;
 
 public class Comment {
 
-    private CommentId id;
-    private CommentAuthor author;
-    private CommentContent content;
+    private final CommentId commentId;
+    private final CommentAuthor commentAuthor;
+    private CommentContent commentContent;
 
-    public Comment(CommentAuthor author, CommentContent content) {
-        this.id = CommentId.generate();
-        this.author = author;
-        this.content = content;
+    public Comment(CommentAuthor commentAuthor, CommentContent commentContent) {
+        this.commentId = CommentId.generate();
+        this.commentAuthor = commentAuthor;
+        this.commentContent = commentContent;
     }
 
-    public CommentId id() {
-        return id;
+    public CommentId commentId() {
+        return commentId;
     }
 
-    public CommentAuthor author() {
-        return author;
+    public CommentAuthor commentAuthor() {
+        return commentAuthor;
     }
 
-    public CommentContent content() {
-        return content;
+    public CommentContent commentContent() {
+        return commentContent;
     }
 
     public void update(CommentContent commentContent) {
-        this.content = commentContent;
+        this.commentContent = commentContent;
     }
 }
