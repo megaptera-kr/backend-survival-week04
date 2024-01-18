@@ -1,4 +1,4 @@
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import styled from 'styled-components';
 
@@ -43,76 +43,76 @@ const Submit = styled.div`
     padding: .8rem 2rem;
   }
 `;
-export default function Comments({postId}) {
-    const {comments, reload} = useFetchComments({postId});
+export default function Comments({ postId }) {
+  const { comments, reload } = useFetchComments({ postId });
 
-    const {saveComment, deleteComment} = useComment({postId});
+  const { saveComment, deleteComment } = useComment({ postId });
 
-    const {setValue, register, handleSubmit, formState: {errors}} = useForm();
+  const { setValue, register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleSaveComment = async (data) => {
-        await saveComment(data);
+  const handleSaveComment = async (data) => {
+    await saveComment(data);
 
-        setValue('postAuthor', '');
-        setValue('content', '');
+    setValue('author', '');
+    setValue('content', '');
 
-        reload();
-    };
+    reload();
+  };
 
-    const handleDeleteComment = async (id) => {
-        await deleteComment(id);
+  const handleDeleteComment = async (id) => {
+    await deleteComment(id);
 
-        reload();
-    };
+    reload();
+  };
 
-    if (!comments) {
-        return (
-            <p>
-                Now loading...
-            </p>
-        );
-    }
-
+  if (!comments) {
     return (
-        <Container>
-            <form onSubmit={handleSubmit(handleSaveComment)}>
-                <Fields>
-                    <TextField
-                        name="postAuthor"
-                        label="댓글 작성자"
-                        register={register}
-                        errors={errors}
-                    />
-                    <TextField
-                        name="content"
-                        label="댓글"
-                        register={register}
-                        errors={errors}
-                    />
-                </Fields>
-                <Submit>
-                    <button type="submit">
-                        저장하기
-                    </button>
-                </Submit>
-            </form>
-            {!comments.length ? (
-                <p>댓글이 없습니다ㅜㅠ</p>
-            ) : (
-                <ul>
-                    {comments.map((comment) => {
-                        return (
-                            <li key={comment.id}>
-                                <Comment
-                                    comment={comment}
-                                    onClickEdit={handleSaveComment}
-                                    onClickDelete={handleDeleteComment}
-                                />
-                            </li>
-                        );
-                    })}
-                </ul>
-            )}
-        </Container>
+      <p>
+        Now loading...
+      </p>
     );
+  }
+
+  return (
+    <Container>
+      <form onSubmit={handleSubmit(handleSaveComment)}>
+        <Fields>
+          <TextField
+            name="author"
+            label="댓글 작성자"
+            register={register}
+            errors={errors}
+          />
+          <TextField
+            name="content"
+            label="댓글"
+            register={register}
+            errors={errors}
+          />
+        </Fields>
+        <Submit>
+          <button type="submit">
+            저장하기
+          </button>
+        </Submit>
+      </form>
+      {!comments.length ? (
+        <p>댓글이 없습니다ㅜㅠ</p>
+      ) : (
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <li key={comment.id}>
+                <Comment
+                  comment={comment}
+                  onClickEdit={handleSaveComment}
+                  onClickDelete={handleDeleteComment}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Container>
+  );
 }
