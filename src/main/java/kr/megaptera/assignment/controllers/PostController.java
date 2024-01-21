@@ -2,7 +2,6 @@ package kr.megaptera.assignment.controllers;
 
 import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dtos.PostCreateDto;
-import kr.megaptera.assignment.dtos.PostDeleteDto;
 import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.dtos.PostUpdateDto;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +24,8 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public PostDto detail(){
-        PostDto postDto = postService.getPostDto();
+    public PostDto detail(@PathVariable String id){
+        PostDto postDto = postService.getPostDto(id);
 
         return postDto;
     }
@@ -39,15 +38,15 @@ public class PostController {
     }
 
     @PatchMapping("/posts/{id}")
-    public PostDto update(@RequestBody PostUpdateDto postUpdateDto){
-        PostDto updated = postService.updatePost(postUpdateDto);
+    public PostDto update(@PathVariable String id, @RequestBody PostUpdateDto postUpdateDto){
+        PostDto updated = postService.updatePost(id, postUpdateDto);
 
         return updated;
     }
 
     @DeleteMapping("/posts/{id}")
-    public PostDto delete(@RequestBody PostDeleteDto postDeleteDto){
-        PostDto deleted = postService.deletePost(postDeleteDto);
+    public PostDto delete(@PathVariable String id){
+        PostDto deleted = postService.deletePost(id);
 
         return deleted;
     }
