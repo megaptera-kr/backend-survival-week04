@@ -1,6 +1,6 @@
 package kr.megaptera.assignment.repositories;
 
-import kr.megaptera.assignment.dtos.PostId;
+import kr.megaptera.assignment.models.PostId;
 import kr.megaptera.assignment.models.Post;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class PostRepository {
     Map<PostId, Post> posts;
 
     public PostRepository(){
-        posts = new HashMap<>();
+        this.posts = new HashMap<>();
     }
 
     public List<Post> findAll() {

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PostCreateDto {
-    String title;
-    String author;
-    String content;
+    private String title;
+    private String author;
+    private String content;
 }

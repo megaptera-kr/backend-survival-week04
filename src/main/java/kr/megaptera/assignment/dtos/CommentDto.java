@@ -1,6 +1,6 @@
 package kr.megaptera.assignment.dtos;
 
-import kr.megaptera.assignment.models.Post;
+import kr.megaptera.assignment.models.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
+public class CommentDto {
     private String id;
-    private String title;
     private String author;
     private String content;
 
-    public PostDto(Post post) {
-        this(post.id().toString(), post.getTitle(),
-                post.getAuthor(), post.getContent());
+    public CommentDto(Comment comment){
+        this(comment.id().toString(),
+                comment.getAuthor(),
+                comment.getContent());
     }
 }
+

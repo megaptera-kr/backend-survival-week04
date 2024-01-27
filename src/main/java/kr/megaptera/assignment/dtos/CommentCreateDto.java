@@ -3,7 +3,7 @@ package kr.megaptera.assignment.dtos;
 import lombok.Data;
 
 @Data
-public class PostUpdateDto {
-    private String title;
+public class CommentCreateDto {
+    private String author;
     private String content;
 }

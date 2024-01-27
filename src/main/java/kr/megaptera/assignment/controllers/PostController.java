@@ -4,6 +4,7 @@ import kr.megaptera.assignment.application.PostService;
 import kr.megaptera.assignment.dtos.PostCreateDto;
 import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.dtos.PostUpdateDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class PostController {
 
     private final PostService postService;
 
-    public PostController(){ postService = new PostService();}
+    public PostController(){ this.postService = new PostService();}
 
     @GetMapping
     public List<PostDto> list(){
@@ -30,21 +31,23 @@ public class PostController {
         return postDto;
     }
 
-    @PostMapping("/posts")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)  //HttpStatus : 201
     public PostDto create(@RequestBody PostCreateDto postCreateDto){
         PostDto created = postService.createPost(postCreateDto);
 
         return created;
     }
 
-    @PatchMapping("/posts/{id}")
-    public PostDto update(@PathVariable String id, @RequestBody PostUpdateDto postUpdateDto){
+    @PatchMapping("/{id}")
+    public PostDto update(@PathVariable String id,
+                          @RequestBody PostUpdateDto postUpdateDto){
         PostDto updated = postService.updatePost(id, postUpdateDto);
 
         return updated;
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/{id}")
     public PostDto delete(@PathVariable String id){
         PostDto deleted = postService.deletePost(id);
 
