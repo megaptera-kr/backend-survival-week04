@@ -28,7 +28,6 @@ public class PostService {
     }
 
     public PostDto createPost(PostCreateDto postCreateDto) {
-
         Post post = new Post(
                 postCreateDto.getTitle(),
                 postCreateDto.getAuthor(),

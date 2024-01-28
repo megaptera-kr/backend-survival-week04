@@ -23,6 +23,15 @@ public class PostRepository {
     public Post find(PostId id) {
         Post post = posts.get(id);
 
+        if (post == null){
+            System.out.println("PostId :"+ id);
+            for (Map.Entry<PostId, Post> entrySet : posts.entrySet()) {
+                System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
+            }
+
+            //throw new RuntimeException("Post Not Found");
+        }
+
         return post;
     }
 
