@@ -1,4 +1,4 @@
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import _ from 'lodash';
 
@@ -57,75 +57,75 @@ const Container = styled.div`
   }
 `;
 
-export default function Editor({post, onSubmit}) {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+export default function Editor({ post, onSubmit }) {
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const handleSubmitPost = (data) => {
-        if (!_.isEmpty(post)) {
-            onSubmit({
-                id: post.id,
-                ...data,
-            });
-            return;
-        }
+  const handleSubmitPost = (data) => {
+    if (!_.isEmpty(post)) {
+      onSubmit({
+        id: post.id,
+        ...data,
+      });
+      return;
+    }
 
-        onSubmit(data);
-    };
+    onSubmit(data);
+  };
 
-    return (
-        <Container>
-            <h2>글 작성하기</h2>
-            <form onSubmit={(handleSubmit(handleSubmitPost))}>
-                <div>
-                    <label htmlFor="input-title">
-                        제목
-                    </label>
-                    <input
-                        id="input-title"
-                        defaultValue={_.isEmpty(post) ? '' : post.title}
-                        {...register('title', {required: true})}
-                    />
-                    {errors.title && <span>필수 입력 값 입니다!</span>}
-                </div>
-                {_.isEmpty(post) ? (
-                    <div>
-                        <label htmlFor="input-postAuthor">
-                            작성자
-                        </label>
-                        <input
-                            id="input-postAuthor"
-                            {...register('postAuthor', {required: true})}
-                        />
-                        {errors.postAuthor && <span>필수 입력 값 입니다!</span>}
-                    </div>
-                ) : (
-                    <>
-                        <div>
-                            작성자
-                        </div>
-                        <p>
-                            {post.postAuthor}
-                        </p>
-                    </>
-                )}
-                <div>
-                    <label htmlFor="input-content">
-                        내용
-                    </label>
-                    <textarea
-                        id="input-content"
-                        defaultValue={_.isEmpty(post) ? '' : post.content}
-                        rows={10}
-                        {...register('content', {required: true})}
-                    />
-                    {errors.content && <span>필수 입력 값 입니다!</span>}
-                </div>
-                <div>
-                    <button type="submit">
-                        저장하기
-                    </button>
-                </div>
-            </form>
-        </Container>
-    );
+  return (
+    <Container>
+      <h2>글 작성하기</h2>
+      <form onSubmit={(handleSubmit(handleSubmitPost))}>
+        <div>
+          <label htmlFor="input-title">
+            제목
+          </label>
+          <input
+            id="input-title"
+            defaultValue={_.isEmpty(post) ? '' : post.title}
+            {...register('title', { required: true })}
+          />
+          {errors.title && <span>필수 입력 값 입니다!</span>}
+        </div>
+        {_.isEmpty(post) ? (
+          <div>
+            <label htmlFor="input-author">
+              작성자
+            </label>
+            <input
+              id="input-author"
+              {...register('author', { required: true })}
+            />
+            {errors.author && <span>필수 입력 값 입니다!</span>}
+          </div>
+        ) : (
+          <>
+            <div>
+              작성자
+            </div>
+            <p>
+              {post.author}
+            </p>
+          </>
+        )}
+        <div>
+          <label htmlFor="input-content">
+            내용
+          </label>
+          <textarea
+            id="input-content"
+            defaultValue={_.isEmpty(post) ? '' : post.content}
+            rows={10}
+            {...register('content', { required: true })}
+          />
+          {errors.content && <span>필수 입력 값 입니다!</span>}
+        </div>
+        <div>
+          <button type="submit">
+            저장하기
+          </button>
+        </div>
+      </form>
+    </Container>
+  );
 }
