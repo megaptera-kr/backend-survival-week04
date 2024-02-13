@@ -14,8 +14,14 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//  implementation 'org.projectlombok:lombok:1.18.22'
+	//	implementation 'org.projectlombok:lombok:1.18.22'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//tsid
+	implementation 'com.github.f4b6a3:tsid-creator:5.2.0'
 }
 
 tasks.named('test') {
