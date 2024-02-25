@@ -13,4 +13,19 @@ public class Post {
         this.postContent = postContent;
     }
 
+    public PostId id() {
+        return id;
+    }
+
+    public PostTitle title() {
+        return title;
+    }
+
+    public Author author() {
+        return author;
+    }
+
+    public PostContent postContent() {
+        return postContent;
+    }
 }
