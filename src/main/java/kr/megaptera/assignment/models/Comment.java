@@ -38,4 +38,26 @@ public class Comment {
         this.author = author;
         this.content = content;
     }
+
+    public void applyPatch(Comment comment){
+        if (comment.content() != null){
+            this.content = comment.content();
+        }
+    }
+
+    public void setId(CommentId id) {
+        this.id = id;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setContent(CommentContent content) {
+        this.content = content;
+    }
+
+    public void setPostId(PostId postId) {
+        this.postId = postId;
+    }
 }

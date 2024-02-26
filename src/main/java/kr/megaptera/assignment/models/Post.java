@@ -4,14 +4,25 @@ public class Post {
     private PostId id;
     private PostTitle title;
     private Author author;
-    private PostContent postContent;
+    private PostContent content;
 
-    public Post(PostId id, PostTitle title, Author author, PostContent postContent) {
+    public Post() {
+    }
+
+    public Post(PostId id, PostTitle title, Author author, PostContent content) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.postContent = postContent;
+        this.content = content;
     }
+
+    public Post(Post originPost, PostTitle title, PostContent content) {
+        this.id = originPost.id();
+        this.author = originPost.author();
+        this.title = title;
+        this.content = content;
+    }
+
 
     public PostId id() {
         return id;
@@ -26,6 +37,22 @@ public class Post {
     }
 
     public PostContent postContent() {
-        return postContent;
+        return content;
+    }
+
+    public void setId(PostId id) {
+        this.id = id;
+    }
+
+    public void setTitle(PostTitle title) {
+        this.title = title;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setContent(PostContent content) {
+        this.content = content;
     }
 }

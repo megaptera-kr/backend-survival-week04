@@ -1,9 +1,10 @@
 package kr.megaptera.assignment.application;
 
-import kr.megaptera.assignment.models.Post;
+import kr.megaptera.assignment.models.*;
 import kr.megaptera.assignment.repositories.PostRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public class PostService {
     private final PostRepository postRepository;
@@ -12,23 +13,29 @@ public class PostService {
         postRepository = new PostRepository();
     }
 
-    public List<Post> getPosts(){
+    public Map<PostId, Post> getPosts(){
         return postRepository.getPosts();
     }
 
     public Post getPost(String id){
-        return postRepository.getPost(id);
+        return postRepository.getPost(PostId.of(id));
     }
 
-    public Post postPost(String title, String author, String content) {
-        return postRepository.postPost(title, author, content);
+    public Post postPost(Post post) {
+        Post addPost = new Post(new PostId(), post.title(), post.author(), post.postContent());
+        postRepository.postPost(addPost);
+        return addPost;
     }
 
-    public Post patchPost(String id, String title, String content) {
-        return postRepository.patchPost(id, title, content);
+    public Post patchPost(String id, Post post) {
+        Post patchPost = new Post(postRepository.getPost(PostId.of(id)), post.title(), post.postContent());
+        postRepository.patchPost(patchPost);
+        return patchPost;
     }
 
     public Post deletePost(String id) {
-        return postRepository.deletePost(id);
+        Post deletePost = postRepository.getPost(PostId.of(id));
+        postRepository.deletePost(deletePost);
+        return deletePost;
     }
 }
