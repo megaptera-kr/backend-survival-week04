@@ -49,15 +49,4 @@ public class Comment {
         this.id = id;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public void setContent(CommentContent content) {
-        this.content = content;
-    }
-
-    public void setPostId(PostId postId) {
-        this.postId = postId;
-    }
 }

@@ -1,51 +1,53 @@
 package kr.megaptera.assignment.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.megaptera.assignment.application.PostService;
+import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.models.Post;
-import kr.megaptera.assignment.models.PostId;
-import kr.megaptera.assignment.repositories.PostRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin
 @RestController()
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
-    public PostController() {
+    private final ObjectMapper objectMapper;
+
+    public PostController(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
         this.postService = new PostService();
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Map<PostId, Post> getPosts(){
+    public List<PostDto> getPosts(){
         return postService.getPosts();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Post getPost(@PathVariable("id") String id){
+    public PostDto getPost(@PathVariable("id") String id){
         return postService.getPost(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Post postPost(@RequestBody Post post){
+    public PostDto postPost(@RequestBody PostDto post){
         return postService.postPost(post);
     }
 
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Post patchPost(@PathVariable("id") String id, @RequestBody Post post){
+    public PostDto patchPost(@PathVariable("id") String id, @RequestBody PostDto post){
         return postService.patchPost(id, post);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Post deletePost(@PathVariable("id") String id){
+    public PostDto deletePost(@PathVariable("id") String id){
         return postService.deletePost(id);
     }
 }

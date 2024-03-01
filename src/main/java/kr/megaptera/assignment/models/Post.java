@@ -43,16 +43,4 @@ public class Post {
     public void setId(PostId id) {
         this.id = id;
     }
-
-    public void setTitle(PostTitle title) {
-        this.title = title;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public void setContent(PostContent content) {
-        this.content = content;
-    }
 }

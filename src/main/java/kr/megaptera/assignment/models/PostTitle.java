@@ -10,4 +10,9 @@ public class PostTitle {
     public static PostTitle of(String title){
         return new PostTitle(title);
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

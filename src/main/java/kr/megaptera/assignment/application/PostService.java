@@ -1,5 +1,6 @@
 package kr.megaptera.assignment.application;
 
+import kr.megaptera.assignment.dtos.PostDto;
 import kr.megaptera.assignment.models.*;
 import kr.megaptera.assignment.repositories.PostRepository;
 
@@ -13,29 +14,35 @@ public class PostService {
         postRepository = new PostRepository();
     }
 
-    public Map<PostId, Post> getPosts(){
-        return postRepository.getPosts();
+    public List<PostDto> getPosts(){
+        List<PostDto> postDtos = postRepository.getPosts().stream().map(PostDto::new).toList();
+        return postDtos;
     }
 
-    public Post getPost(String id){
-        return postRepository.getPost(PostId.of(id));
+    public PostDto getPost(String id){
+        return new PostDto(postRepository.getPost(new PostId(id)));
     }
 
-    public Post postPost(Post post) {
-        Post addPost = new Post(new PostId(), post.title(), post.author(), post.postContent());
+    public PostDto postPost(PostDto post) {
+        Post addPost = new Post(new PostId()
+                , PostTitle.of(post.getTitle())
+                , Author.of(post.getAuthor())
+                , PostContent.of(post.getContent()));
         postRepository.postPost(addPost);
-        return addPost;
+        return new PostDto(addPost);
     }
 
-    public Post patchPost(String id, Post post) {
-        Post patchPost = new Post(postRepository.getPost(PostId.of(id)), post.title(), post.postContent());
+    public PostDto patchPost(String id, PostDto post) {
+        Post patchPost = new Post(postRepository.getPost(PostId.of(id))
+                , PostTitle.of(post.getTitle())
+                , PostContent.of(post.getContent()));
         postRepository.patchPost(patchPost);
-        return patchPost;
+        return new PostDto(patchPost);
     }
 
-    public Post deletePost(String id) {
+    public PostDto deletePost(String id) {
         Post deletePost = postRepository.getPost(PostId.of(id));
         postRepository.deletePost(deletePost);
-        return deletePost;
+        return new PostDto(deletePost);
     }
 }

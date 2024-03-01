@@ -14,4 +14,9 @@ public class CommentContent {
     public static CommentContent of(String content){
         return new CommentContent(MultilineContent.of(content));
     }
+
+    @Override
+    public String toString() {
+        return content.toString();
+    }
 }

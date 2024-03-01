@@ -1,32 +1,32 @@
 package kr.megaptera.assignment.repositories;
 
-import kr.megaptera.assignment.models.*;
+import kr.megaptera.assignment.models.Post;
+import kr.megaptera.assignment.models.PostId;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PostRepository {
-    private final Map<PostId, Post> posts;
+    private final List<Post> posts;
     public PostRepository() {
-        this.posts = new HashMap<>();
+        this.posts = new ArrayList<>();
     }
 
-    public Map<PostId, Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
     public Post getPost(PostId id){
-        return posts.get(id);
+        Post findPost = posts.stream().filter(post -> post.id().equals(id)).findFirst().orElse(null);
+        return findPost;
     }
 
     public void postPost(Post post) {
-        posts.put(post.id(), post);
+        posts.add(post);
     }
 
     public void patchPost(Post patchPost) {
-        posts.put(patchPost.id(), patchPost);
+        posts.add(patchPost);
     }
 
     public void deletePost(Post post) {

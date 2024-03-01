@@ -16,4 +16,9 @@ public class CommentId {
     public static CommentId of(String id){
         return new CommentId(id);
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
 }

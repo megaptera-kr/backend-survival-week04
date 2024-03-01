@@ -1,5 +1,6 @@
 package kr.megaptera.assignment.application;
 
+import kr.megaptera.assignment.dtos.CommentDto;
 import kr.megaptera.assignment.models.Comment;
 import kr.megaptera.assignment.models.CommentContent;
 import kr.megaptera.assignment.models.CommentId;
@@ -16,30 +17,31 @@ public class CommentService {
         this.commentRepository = new CommentRepository();
     }
 
-    public List<Comment> getComments(String postId) {
+    public List<CommentDto> getComments(String postId) {
         return commentRepository.getComments().stream()
                 .filter(comment -> comment.postId().equals(postId))
+                .map(CommentDto::new)
                 .collect(Collectors.toList());
     }
 
-    public Comment postComment(String postId, String author, String content) {
-        return commentRepository.postComment(postId, author, content);
+    public CommentDto postComment(String postId, CommentDto content) {
+        return new CommentDto(commentRepository.postComment(postId, content));
     }
 
-    public Comment patchComment(String id, String postId, String content) {
+    public CommentDto patchComment(String id, String postId, CommentDto content) {
         Comment originComment = commentRepository.getComment(CommentId.of(id));
         Comment patchComment = new Comment(CommentId.of(id)
                                          , PostId.of(postId)
                                          , originComment.author()
-                                         , CommentContent.of(content));
+                                         , CommentContent.of(content.getContent()));
         commentRepository.patchComment(patchComment);
-        return patchComment;
+        return new CommentDto(patchComment);
     }
 
-    public Comment deleteComment(String id, String postId) {
+    public CommentDto deleteComment(String id, String postId) {
         Comment originComment = commentRepository.getComment(CommentId.of(id));
         commentRepository.deleteComment(originComment);
 
-        return originComment;
+        return new CommentDto(originComment);
     }
 }

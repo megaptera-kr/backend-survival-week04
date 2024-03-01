@@ -14,4 +14,9 @@ public class PostContent {
     public PostContent(MultilineContent content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return content.toString();
+    }
 }

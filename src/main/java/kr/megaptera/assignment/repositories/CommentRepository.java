@@ -1,5 +1,6 @@
 package kr.megaptera.assignment.repositories;
 
+import kr.megaptera.assignment.dtos.CommentDto;
 import kr.megaptera.assignment.models.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ public class CommentRepository {
     private List<Comment> comments;
 
     public CommentRepository() {
-        this.comments = new ArrayList<Comment>();
+        this.comments = new ArrayList<>();
     }
 
     public List<Comment> getComments() {
@@ -23,8 +24,10 @@ public class CommentRepository {
                 .orElse(null);
     }
 
-    public Comment postComment(String postId, String author, String content) {
-        Comment addComment = new Comment(PostId.of(postId), Author.of(author), CommentContent.of(content));
+    public Comment postComment(String postId, CommentDto commentDto) {
+        Comment addComment = new Comment(PostId.of(postId)
+                , Author.of(commentDto.getAuthor())
+                , CommentContent.of(commentDto.getContent()));
         comments.add(addComment);
         return addComment;
     }
